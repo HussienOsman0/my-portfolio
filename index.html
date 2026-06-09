@@ -37,7 +37,7 @@
         }
 
         /* --- الهيرو --- */
-        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; text-align: left; justify-content: flex-start; }
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; text-align: left; justify-content: flex-start; align-items: center; }
         .hero-content { display: flex; flex-direction: column; justify-content: center; }
         .status-badge { display: inline-block; padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); font-size: 0.85rem; margin-bottom: 20px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
         
@@ -57,7 +57,7 @@
 
         .contact-links { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
         .contact-btn {
-            display: flex; align-items: center; gap: 8px; justify-content: center;
+            display: flex; align-items: center; gap: 8px;
             padding: 12px 24px; border-radius: 50px;
             background: rgba(255, 255, 255, 0.1);
             color: #FFF; text-decoration: none;
@@ -70,7 +70,7 @@
 
         .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
         .profile-img {
-            width: 350px; height: 350px; object-fit: cover;
+            width: 100%; max-width: 350px; height: auto; aspect-ratio: 1/1; object-fit: cover;
             border-radius: 20px; border: 1px solid rgba(128,128,128,0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             opacity: 0; transform: translateY(30px);
@@ -135,7 +135,7 @@
         .cb-achievements .feature-item { border-color: var(--cb-accent); background: rgba(0,0,0,0.02); color: var(--cb-text); }
         .cb-achievements .feature-item strong { color: var(--cb-accent); }
 
-        #carebox .tech-badge { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.2); color: var(--cb-text); }
+        #carebox .tech-badge { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.2); color: var(--cb-text); justify-content: center;}
         #carebox .tech-stack { justify-content: center; } 
 
         /* --- Footer --- */
@@ -148,59 +148,85 @@
         .footer .contact-btn:hover { background: #e2e8f0; transform: none; }
 
         /* ========================================================
-           RESPONSIVE MEDIA QUERIES (الهواتف الذكية والأجهزة اللوحية) 
+           RESPONSIVE: الحفاظ على شكل الويب مع تصغير الأحجام 
            ======================================================== */
         
+        /* شاشات التابلت والموبايل العرضي */
         @media (max-width: 968px) {
-            section { padding: 6vh 5vw; } /* تقليل المسافات العلوية والسفلية */
+            section { padding: 8vh 4vw; } 
             
-            /* الهيرو */
-            .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-            .hero-content { align-items: center; }
-            .hero h1 { font-size: 3rem; }
-            .hero h2 { font-size: 1.3rem; }
-            .hero p.bio { font-size: 1rem; text-align: center; }
-            .status-badge { margin: 0 auto 20px auto; }
+            /* الحفاظ على العمودين في الهيرو */
+            .hero { grid-template-columns: 1.2fr 1fr; gap: 2rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .hero p.bio { font-size: 0.9rem; }
+            .status-badge { font-size: 0.75rem; margin-bottom: 10px; }
             
-            /* صندوق المهارات */
-            .skills-box { border-left: none; border-top: 3px solid #ffffff; border-radius: 10px; padding: 20px 15px; text-align: left; }
+            .skills-box { padding: 15px; }
+            .skills-box p { font-size: 0.85rem; }
             
-            /* أزرار التواصل */
-            .contact-links { justify-content: center; width: 100%; }
-            
-            /* الصورة الشخصية */
-            .hero-image-container { order: -1; margin-bottom: 1rem; }
-            .profile-img { width: 250px; height: 250px; }
+            .contact-btn { padding: 8px 16px; font-size: 0.85rem; }
             
             /* المشاريع */
-            .project-content h2 { font-size: 2.8rem; text-align: center; }
-            .project-desc { text-align: center; font-size: 1rem; }
-            .tech-stack { justify-content: center; }
-            .feature-item { font-size: 0.95rem; padding: 15px; }
+            .project-content h2 { font-size: 3rem; }
+            .project-desc { font-size: 0.95rem; }
+            .feature-item { font-size: 0.85rem; padding: 15px; }
+            .tech-badge { font-size: 0.75rem; }
 
-            /* CareBox الخاص */
-            .carebox-grid { grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+            /* الحفاظ على العمودين في CareBox */
+            .carebox-grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
             .cb-header h2 { font-size: 3.5rem !important; }
             .cb-header h3 { font-size: 1.4rem !important; }
             .cb-card { padding: 20px; }
+            .cb-card h3 { font-size: 1rem; }
+            .cb-card p, .cb-card ul { font-size: 0.85rem; }
             
-            /* إخفاء سهم النزول لتوفير المساحة */
             .scroll-indicator { display: none; }
-            .section-divider { font-size: 1.5rem; padding: 40px 0; }
-            
-            .footer h2 { font-size: 2rem; }
         }
 
-        /* الشاشات الصغيرة جداً (مثل iPhone SE) */
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2.5rem; }
-            .project-content h2 { font-size: 2.2rem; }
-            .cb-header h2 { font-size: 2.5rem !important; }
+        /* شاشات الموبايل بالطول (التصغير الأقصى للحفاظ على العمودين) */
+        @media (max-width: 580px) {
+            section { padding: 5vh 3vw; }
             
-            /* جعل الأزرار تأخذ عرض الشاشة بالكامل */
-            .contact-links { flex-direction: column; width: 100%; }
-            .contact-btn { width: 100%; }
-            .footer .contact-btn { width: 100%; box-sizing: border-box; }
+            /* الهيرو - مقاسات دقيقة جداً */
+            .hero { gap: 1rem; grid-template-columns: 1.2fr 1fr; }
+            .hero h1 { font-size: 1.8rem; letter-spacing: 0; }
+            .hero h2 { font-size: 0.8rem; margin: 8px 0; }
+            .hero p.bio { font-size: 0.65rem; line-height: 1.4; }
+            
+            .status-badge { font-size: 0.6rem; padding: 4px 8px; }
+            
+            .skills-box { padding: 10px; border-left-width: 2px; margin-top: 10px; }
+            .skills-box p { font-size: 0.6rem; margin: 5px 0;}
+            
+            .contact-links { gap: 5px; margin-top: 15px; }
+            .contact-btn { padding: 6px 10px; font-size: 0.6rem; }
+            .contact-btn svg { width: 12px; height: 12px; }
+            
+            /* المشاريع */
+            .project-content h2 { font-size: 2rem; }
+            .project-desc { font-size: 0.7rem; margin-bottom: 1rem; }
+            .feature-item { font-size: 0.65rem; padding: 10px; border-left-width: 2px; margin-bottom: 8px; }
+            .tech-badge { font-size: 0.55rem; padding: 3px 6px; }
+            
+            /* CareBox */
+            .cb-header h2 { font-size: 2.2rem !important; margin-bottom: 5px !important; }
+            .cb-header h3 { font-size: 1rem !important; margin-bottom: 10px !important; }
+            .cb-meta { font-size: 0.65rem; margin-bottom: 4px; }
+            .grad-badge { font-size: 0.65rem; padding: 4px 8px; margin-bottom: 15px; }
+            
+            .carebox-grid { gap: 10px; margin-top: 15px; }
+            .cb-card { padding: 10px; border-radius: 6px; }
+            .cb-card h3 { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 8px; }
+            .cb-card p, .cb-card ul { font-size: 0.6rem; line-height: 1.4; margin: 0; }
+            .cb-card ul { padding-left: 15px; }
+            .cb-card li { margin-bottom: 6px; }
+            
+            /* الفوتر */
+            .footer { padding: 40px 10px; }
+            .footer h2 { font-size: 1.2rem; }
+            .footer p { font-size: 0.7rem; }
+            .footer .contact-btn { padding: 8px 16px; font-size: 0.7rem; }
         }
     </style>
 </head>
