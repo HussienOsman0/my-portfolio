@@ -31,13 +31,13 @@
         }
 
         section { 
-            min-height: 100vh; padding: 10vh 10vw; 
+            min-height: 100vh; padding: 10vh 8vw; 
             display: flex; align-items: center; box-sizing: border-box; justify-content: center;
-            position: relative;
+            position: relative; overflow: hidden; 
         }
 
         /* --- الهيرو --- */
-        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; text-align: left; justify-content: flex-start; align-items: center; }
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; text-align: left; align-items: center; width: 100%; max-width: 1200px; z-index: 2;}
         .hero-content { display: flex; flex-direction: column; justify-content: center; }
         .status-badge { display: inline-block; padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); font-size: 0.85rem; margin-bottom: 20px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
         
@@ -57,7 +57,7 @@
 
         .contact-links { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
         .contact-btn {
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 8px; justify-content: center;
             padding: 12px 24px; border-radius: 50px;
             background: rgba(255, 255, 255, 0.1);
             color: #FFF; text-decoration: none;
@@ -70,7 +70,7 @@
 
         .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
         .profile-img {
-            width: 100%; max-width: 350px; height: auto; aspect-ratio: 1/1; object-fit: cover;
+            width: 100%; max-width: 350px; aspect-ratio: 1/1; object-fit: cover;
             border-radius: 20px; border: 1px solid rgba(128,128,128,0.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             opacity: 0; transform: translateY(30px);
@@ -92,141 +92,162 @@
         }
 
         /* --- تنسيق المشاريع المشترك --- */
-        .project-content { max-width: 1000px; width: 100%; }
-        .project-content h2 { font-size: 4rem; margin: 0 0 1rem 0; line-height: 1; letter-spacing: -1px; }
-        .project-desc { font-size: 1.1rem; opacity: 0.85; margin-bottom: 2.5rem; line-height: 1.7; }
-        .feature-list { list-style: none; padding: 0; margin: 0; }
-        .feature-item { 
-            background: rgba(128, 128, 128, 0.1); border-left: 3px solid; 
-            padding: 20px 25px; margin-bottom: 15px; font-size: 1rem; line-height: 1.6; opacity: 0; transform: translateX(-30px); 
-        }
-        .tech-stack { display: flex; gap: 10px; margin-top: 35px; flex-wrap: wrap; }
+        .project-content { max-width: 1000px; width: 100%; z-index: 2; position: relative;}
+        .project-content h2 { font-size: 3.5rem; margin: 0 0 10px 0; line-height: 1; letter-spacing: -1px; }
+        .project-short-desc { font-size: 1.1rem; opacity: 0.9; margin-bottom: 1.5rem; line-height: 1.6; }
+        
+        .tech-stack { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
         .tech-badge { 
             padding: 6px 16px; border-radius: 4px; background: rgba(128, 128, 128, 0.1); 
             font-size: 0.85rem; font-weight: 500; border: 1px solid rgba(128, 128, 128, 0.2); 
         }
 
+        .toggle-btn {
+            background: transparent; color: inherit;
+            border: 1px solid currentColor; padding: 10px 24px;
+            border-radius: 5px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            text-transform: uppercase; letter-spacing: 1px;
+            opacity: 0.8; margin-bottom: 20px;
+        }
+        .toggle-btn:hover { opacity: 1; background: rgba(128, 128, 128, 0.1); }
+
+        .details-container { overflow: hidden; height: 0; opacity: 0; margin-top: 10px; }
+        .feature-list { list-style: none; padding: 0; margin: 0; }
+        .feature-item { background: rgba(128, 128, 128, 0.1); border-left: 3px solid; padding: 20px 25px; margin-bottom: 15px; font-size: 1rem; line-height: 1.6; }
+
         #shefa .feature-item { border-color: var(--sh-accent); }
         #gearbox .feature-item { border-color: var(--gb-accent); }
 
-        /* --- تنسيق CareBox VIP --- */
-        .carebox-content { max-width: 1200px; width: 100%; text-align: center; } 
+        /* --- تنسيق CareBox --- */
+        .carebox-content { max-width: 1200px; width: 100%; text-align: center; z-index: 2; position: relative;} 
         .grad-badge {
             display: inline-block; padding: 6px 12px; border-radius: 4px;
             background: var(--cb-accent); color: #FFF; font-weight: 600; font-size: 0.9rem;
-            margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;
         }
-        
         .cb-meta { font-size: 1rem; margin-bottom: 8px; opacity: 0.9; }
-        
-        .carebox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; text-align: left; } 
-        
-        .cb-card {
-            background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px; padding: 30px;
-            opacity: 0; transform: translateY(30px);
-        }
+        .carebox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; text-align: left; } 
+        .cb-card { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 30px; }
         .cb-card h3 { color: var(--cb-accent); margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
-        .cb-card p, .cb-card ul { font-size: 1rem; line-height: 1.7; opacity: 0.9; }
+        .cb-card p, .cb-card ul { font-size: 1rem; line-height: 1.7; opacity: 0.9; margin-top: 10px; }
         .cb-card ul { padding-left: 20px; }
         .cb-card li { margin-bottom: 12px; }
         
         .cb-achievements { grid-column: 1 / -1; }
         .cb-achievements .feature-item { border-color: var(--cb-accent); background: rgba(0,0,0,0.02); color: var(--cb-text); }
         .cb-achievements .feature-item strong { color: var(--cb-accent); }
-
-        #carebox .tech-badge { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.2); color: var(--cb-text); justify-content: center;}
+        #carebox .tech-badge { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.2); color: var(--cb-text); }
         #carebox .tech-stack { justify-content: center; } 
 
-        /* --- Footer --- */
-        .footer {
-            padding: 80px 20px; text-align: center; background-color: #030303; border-top: 1px solid rgba(255,255,255,0.05); color: #FFF;
+        /* ========================================================
+           حركات الخلفية (Background Animations) المتعددة
+           ======================================================== */
+        .bg-icon {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none; 
         }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -15px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); opacity: 0.1; }
+            15% { transform: scale(1.1); opacity: 0.2; }
+            30% { transform: scale(1); opacity: 0.1; }
+            45% { transform: scale(1.1); opacity: 0.2; }
+            60% { transform: scale(1); opacity: 0.1; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .icon-float { animation: float 6s ease-in-out infinite; }
+        .icon-drift { animation: drift 8s ease-in-out infinite; }
+        .icon-pulse { animation: heartbeat 3s infinite; }
+        .icon-spin { animation: spin 25s linear infinite; }
+        .icon-spin-rev { animation: spin-reverse 20s linear infinite; }
+
+        /* --- Footer --- */
+        .footer { padding: 80px 20px; text-align: center; background-color: #030303; border-top: 1px solid rgba(255,255,255,0.05); color: #FFF; z-index: 2; position: relative;}
         .footer h2 { font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 300; }
         .footer p { color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px; }
         .footer .contact-btn { display: inline-flex; background: #FFF; color: #000; font-weight: 600; padding: 15px 30px; border-radius: 4px; border: none; }
         .footer .contact-btn:hover { background: #e2e8f0; transform: none; }
 
         /* ========================================================
-           RESPONSIVE: الحفاظ على شكل الويب مع تصغير الأحجام 
+           RESPONSIVE
            ======================================================== */
-        
-        /* شاشات التابلت والموبايل العرضي */
         @media (max-width: 968px) {
             section { padding: 8vh 4vw; } 
-            
-            /* الحفاظ على العمودين في الهيرو */
-            .hero { grid-template-columns: 1.2fr 1fr; gap: 2rem; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero h2 { font-size: 1.1rem; }
-            .hero p.bio { font-size: 0.9rem; }
-            .status-badge { font-size: 0.75rem; margin-bottom: 10px; }
-            
+            .hero { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.2rem; margin: 10px 0;}
+            .hero p.bio { font-size: 0.95rem; }
             .skills-box { padding: 15px; }
-            .skills-box p { font-size: 0.85rem; }
-            
+            .skills-box p { font-size: 0.85rem; margin: 8px 0;}
             .contact-btn { padding: 8px 16px; font-size: 0.85rem; }
-            
-            /* المشاريع */
-            .project-content h2 { font-size: 3rem; }
-            .project-desc { font-size: 0.95rem; }
-            .feature-item { font-size: 0.85rem; padding: 15px; }
-            .tech-badge { font-size: 0.75rem; }
-
-            /* الحفاظ على العمودين في CareBox */
-            .carebox-grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-            .cb-header h2 { font-size: 3.5rem !important; }
-            .cb-header h3 { font-size: 1.4rem !important; }
+            .project-content h2 { font-size: 2.8rem; }
+            .project-short-desc { font-size: 0.95rem; }
+            .tech-badge { font-size: 0.75rem; padding: 5px 10px; }
+            .carebox-grid { gap: 15px; }
             .cb-card { padding: 20px; }
             .cb-card h3 { font-size: 1rem; }
             .cb-card p, .cb-card ul { font-size: 0.85rem; }
-            
             .scroll-indicator { display: none; }
+            .section-divider { font-size: 1.5rem; padding: 40px 0; }
+            /* تصغير الايقونات الخلفية على التابلت مع الحفاظ على وضوحها */
+            .bg-icon { transform: scale(0.6); opacity: 0.1 !important; }
         }
 
-        /* شاشات الموبايل بالطول (التصغير الأقصى للحفاظ على العمودين) */
         @media (max-width: 580px) {
             section { padding: 5vh 3vw; }
-            
-            /* الهيرو - مقاسات دقيقة جداً */
             .hero { gap: 1rem; grid-template-columns: 1.2fr 1fr; }
             .hero h1 { font-size: 1.8rem; letter-spacing: 0; }
             .hero h2 { font-size: 0.8rem; margin: 8px 0; }
             .hero p.bio { font-size: 0.65rem; line-height: 1.4; }
-            
             .status-badge { font-size: 0.6rem; padding: 4px 8px; }
-            
             .skills-box { padding: 10px; border-left-width: 2px; margin-top: 10px; }
             .skills-box p { font-size: 0.6rem; margin: 5px 0;}
-            
             .contact-links { gap: 5px; margin-top: 15px; }
             .contact-btn { padding: 6px 10px; font-size: 0.6rem; }
             .contact-btn svg { width: 12px; height: 12px; }
-            
-            /* المشاريع */
             .project-content h2 { font-size: 2rem; }
-            .project-desc { font-size: 0.7rem; margin-bottom: 1rem; }
+            .project-short-desc { font-size: 0.7rem; margin-bottom: 1rem; }
             .feature-item { font-size: 0.65rem; padding: 10px; border-left-width: 2px; margin-bottom: 8px; }
             .tech-badge { font-size: 0.55rem; padding: 3px 6px; }
-            
-            /* CareBox */
             .cb-header h2 { font-size: 2.2rem !important; margin-bottom: 5px !important; }
             .cb-header h3 { font-size: 1rem !important; margin-bottom: 10px !important; }
             .cb-meta { font-size: 0.65rem; margin-bottom: 4px; }
             .grad-badge { font-size: 0.65rem; padding: 4px 8px; margin-bottom: 15px; }
-            
             .carebox-grid { gap: 10px; margin-top: 15px; }
             .cb-card { padding: 10px; border-radius: 6px; }
             .cb-card h3 { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 8px; }
             .cb-card p, .cb-card ul { font-size: 0.6rem; line-height: 1.4; margin: 0; }
             .cb-card ul { padding-left: 15px; }
             .cb-card li { margin-bottom: 6px; }
-            
-            /* الفوتر */
+            .toggle-btn { font-size: 0.7rem; padding: 8px 16px; margin-bottom: 10px;}
             .footer { padding: 40px 10px; }
             .footer h2 { font-size: 1.2rem; }
             .footer p { font-size: 0.7rem; }
             .footer .contact-btn { padding: 8px 16px; font-size: 0.7rem; }
+            
+            /* إظهار الأيقونات للموبايل بشفافية هادية وحجم صغير */
+            .bg-icon { transform: scale(0.4); opacity: 0.08 !important; }
         }
     </style>
 </head>
@@ -273,97 +294,141 @@
     </section>
 
     <section id="carebox" class="project-section" data-bg="#E3E3E3" data-text="#191919">
+        <svg class="bg-icon icon-float" style="right: 8%; top: 10%; width: 200px; height: 200px; fill: var(--cb-text); opacity: 0.15;" viewBox="0 0 24 24">
+            <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+        </svg>
+        <svg class="bg-icon icon-drift" style="left: 2%; bottom: 10%; width: 250px; height: 250px; fill: var(--cb-text); opacity: 0.12;" viewBox="0 0 24 24">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+        <svg class="bg-icon icon-spin-rev" style="left: 45%; top: 5%; width: 120px; height: 120px; fill: var(--cb-text); opacity: 0.15;" viewBox="0 0 24 24">
+            <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+        </svg>
+
         <div class="carebox-content">
             <div class="section-divider" style="color: var(--cb-text); border-color: rgba(0,0,0,0.1);">Featured Engineering Work</div>
             
             <div class="cb-header">
                 <div class="grad-badge">Graduation Project & Masterpiece</div>
+                <h2 style="color: var(--cb-accent); font-size: 4rem; margin: 0 0 10px 0; letter-spacing: -2px;">CareBox</h2>
                 
-                <h2 style="color: var(--cb-accent); font-size: 4.5rem; margin: 0 0 10px 0; letter-spacing: -2px;">CareBox</h2>
+                <p class="project-short-desc" style="max-width: 800px; margin: 0 auto 15px auto;">
+                    An end-to-end digital ecosystem revolutionizing the automotive service industry by bridging vehicle owners and service providers via Mobile, Web, and a robust .NET 8 Backend Engine.
+                </p>
 
-                <h3 style="margin: 0 0 20px 0; font-size: 1.8rem; font-weight: 300;">The Ultimate Automotive Service Ecosystem</h3>
-                
-                <p class="cb-meta"><strong>Role:</strong> Lead Backend Engineer (.NET) | <strong>Duration:</strong> 2025 - 2026</p>
-                <p class="cb-meta"><strong>Team:</strong> Developed in collaboration with Ziad (Team Leader), Assem, Abdullah, Talaat, Mahmoud, Hazem, and Salah.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">.NET 8 Web API</span>
+                    <span class="tech-badge">SQL Server</span>
+                    <span class="tech-badge">EF Core</span>
+                    <span class="tech-badge">N-Tier Architecture</span>
+                    <span class="tech-badge">NetTopologySuite</span>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleDetails('cb-details', this)" style="border-color: var(--cb-accent); color: var(--cb-accent);">View Full Details</button>
             </div>
 
-            <div class="carebox-grid">
-                <div class="cb-card cb-anim-card">
-                    <h3>Project Overview</h3>
-                    <p>A comprehensive, end-to-end digital ecosystem revolutionizing the automotive service industry by connecting vehicle owners with service providers across three integrated platforms:</p>
-                    <ul>
-                        <li><strong>Client Mobile Application (Flutter):</strong> A smart digital garage and SOS companion for drivers.</li>
-                        <li><strong>Provider Web Dashboard (React):</strong> A powerful Mini-ERP system for auto centers to manage inventory, invoicing, and bookings.</li>
-                        <li><strong>The Backend Engine (.NET 8):</strong> The robust core that orchestrates real-time data, spatial routing, and strict data isolation.</li>
-                    </ul>
-                </div>
-
-                <div class="cb-card cb-anim-card">
-                    <h3>Architecture & Tech Stack</h3>
-                    <ul>
-                        <li>Designed and managed over <strong>20+ complex relational database entities</strong>.</li>
-                        <li>Enforced <strong>ACID properties</strong> to guarantee transaction safety across all financial and booking operations.</li>
-                        <li>Structured data transfer using <strong>DTOs</strong> to prevent over-posting vulnerabilities and minimize API payload sizes.</li>
-                    </ul>
-                    <div class="tech-stack" style="margin-top: 20px;">
-                        <span class="tech-badge">.NET 8 Web API</span>
-                        <span class="tech-badge">SQL Server</span>
-                        <span class="tech-badge">EF Core (Code-First)</span>
-                        <span class="tech-badge">N-Tier Architecture</span>
-                        <span class="tech-badge">Unit of Work</span>
-                        <span class="tech-badge">JWT / RBAC</span>
-                        <span class="tech-badge">NetTopologySuite</span>
+            <div id="cb-details" class="details-container">
+                <p class="cb-meta"><strong>Role:</strong> Lead Backend Engineer (.NET) | <strong>Duration:</strong> 2025 - 2026</p>
+                <p class="cb-meta"><strong>Team:</strong> Developed in collaboration with Ziad (Team Leader), Assem, Abdullah, Talaat, Mahmoud, Hazem, and Salah.</p>
+                
+                <div class="carebox-grid">
+                    <div class="cb-card">
+                        <h3>Architecture Details</h3>
+                        <ul>
+                            <li>Designed and managed over <strong>20+ complex relational database entities</strong>.</li>
+                            <li>Enforced <strong>ACID properties</strong> to guarantee transaction safety across all financial and booking operations.</li>
+                            <li>Structured data transfer using <strong>DTOs</strong> to prevent over-posting vulnerabilities.</li>
+                        </ul>
                     </div>
-                </div>
+                    <div class="cb-card">
+                        <h3>Security & Patterns</h3>
+                        <ul>
+                            <li>Implemented strict <strong>Role-Based Access Control (RBAC)</strong> and Multi-tenant data isolation logic.</li>
+                            <li>Secured endpoints using <strong>JWT Authentication</strong> and Refresh Token Rotation.</li>
+                            <li>Centralized logic using <strong>Repository Pattern</strong> and <strong>Unit of Work</strong>.</li>
+                        </ul>
+                    </div>
 
-                <div class="cb-card cb-achievements cb-anim-card">
-                    <h3>Key Engineering Achievements</h3>
-                    <ul class="feature-list" style="margin-top: 15px;">
-                        <li class="feature-item cb-feature-anim"><strong>Real-Time SOS & Geolocation Routing:</strong> Integrated NetTopologySuite and Spatial Data (Point) within SQL Server to dynamically calculate and route emergency SOS broadcasts to the nearest service providers in real-time, eliminating heavy mathematical calculations on the database level.</li>
-                        <li class="feature-item cb-feature-anim"><strong>Data Isolation & Security:</strong> Implemented strict Role-Based Access Control (RBAC) and Multi-tenant data isolation logic, ensuring that service providers operate in completely siloed workspaces without any risk of data overlapping or unauthorized access.</li>
-                        <li class="feature-item cb-feature-anim"><strong>Soft Deletion & Data Integrity:</strong> Engineered a rigorous Soft Deletion mechanism across core entities (Vehicles, Services, Products) to preserve historical data integrity. This ensures that past invoices and completed bookings remain fully accessible and calculation-safe even if underlying items are removed.</li>
-                        <li class="feature-item cb-feature-anim"><strong>Smart "Ignore" Logic for Emergencies:</strong> Designed a complex composite-key workflow allowing individual providers to dismiss emergency requests without removing them from the global broadcast pool for other nearby workshops.</li>
-                        <li class="feature-item cb-feature-anim"><strong>Dynamic Billing & Invoicing Engine:</strong> Developed a robust financial engine using EF Core Fluent API to automatically calculate service costs, manage inventory deduction, and transition bookings through their lifecycle seamlessly.</li>
-                    </ul>
+                    <div class="cb-card cb-achievements">
+                        <h3>Key Engineering Achievements</h3>
+                        <ul class="feature-list" style="margin-top: 15px;">
+                            <li class="feature-item"><strong>Real-Time SOS & Geolocation Routing:</strong> Integrated NetTopologySuite and Spatial Data (Point) within SQL Server to dynamically calculate and route emergency SOS broadcasts to the nearest service providers in real-time, eliminating heavy mathematical calculations on the database level.</li>
+                            <li class="feature-item"><strong>Soft Deletion & Data Integrity:</strong> Engineered a rigorous Soft Deletion mechanism across core entities (Vehicles, Services, Products) to preserve historical data integrity.</li>
+                            <li class="feature-item"><strong>Smart Ignore Logic:</strong> Designed a complex composite-key workflow allowing individual providers to dismiss emergency requests without removing them from the global broadcast pool.</li>
+                            <li class="feature-item"><strong>Dynamic Billing Engine:</strong> Developed a robust financial engine using EF Core Fluent API to automatically calculate service costs and manage inventory deduction.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="shefa" class="project-section" data-bg="#0070CD" data-text="#FFFFFF">
+        <svg class="bg-icon icon-pulse" style="left: -2%; bottom: 5%; width: 350px; height: 350px; fill: var(--sh-text);" viewBox="0 0 24 24">
+            <path d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.41-1.004-2.828-5.748a1.005 1.005 0 0 0-1.782 0l-2.828 5.748-5.41 1.004a1.001 1.001 0 0 0-.588 1.66l3.96 4.093-1.042 5.864a1.002 1.002 0 0 0 1.488 1.036l4.86-2.613 4.86 2.613a1.002 1.002 0 0 0 1.488-1.036l-1.042-5.864 3.96-4.093a1.002 1.002 0 0 0 .322-1.004zm-9.947 8.356l-3.528 1.897.757-4.256-3.155-3.262 3.928-.729 2-4.064 2 4.064 3.928.729-3.155 3.262.757 4.256-3.528-1.897z"/>
+            <path d="M24 12h-4.309l-2.222-4.445-3.328 10.65-3.691-14.761-3.69 8.556h-6.76v2h5.24l2.31-5.356 3.691 14.761 3.328-10.65 2.222 4.445h5.191v-2z" transform="translate(0, 10)"/>
+        </svg>
+        <svg class="bg-icon icon-float" style="right: 10%; top: 15%; width: 200px; height: 200px; fill: var(--sh-text); opacity: 0.15;" viewBox="0 0 24 24">
+            <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm4 11h-3v3h-2v-3H8v-2h3V8h2v3h3v2z"/>
+        </svg>
+        <svg class="bg-icon icon-drift" style="right: 40%; bottom: 5%; width: 120px; height: 120px; fill: var(--sh-text); opacity: 0.1;" viewBox="0 0 24 24">
+            <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"/>
+        </svg>
+
         <div class="project-content">
             <h2 style="color: var(--sh-text);">Shefa<span style="color: var(--sh-accent);">.com</span></h2>
-            <p class="project-desc">
-                <strong>Role:</strong> .NET Backend Developer<br>
+            <p class="project-short-desc">
                 A comprehensive digital health platform designed to connect patients with medical professionals, focusing on secure data workflows and complex clinical bookings.
             </p>
-            <ul class="feature-list">
-                <li class="feature-item sh-feature"><strong>Complex Clinical Bookings:</strong> Engineered robust MVC controllers to streamline intricate doctor schedules and appointment algorithms.</li>
-                <li class="feature-item sh-feature"><strong>Secure Patient Records:</strong> Designed a highly isolated and secure SQL Server schema specifically for managing sensitive medical data.</li>
-                <li class="feature-item sh-feature"><strong>Dynamic Loyalty Engine:</strong> Programmed a server-side algorithm to calculate and track point-based rewards for patient engagement.</li>
-            </ul>
+            
             <div class="tech-stack">
-                <span class="tech-badge">ASP.NET Core MVC</span><span class="tech-badge">SQL Server</span><span class="tech-badge">EF Core</span>
+                <span class="tech-badge">ASP.NET Core MVC</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">EF Core</span>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleDetails('sh-details', this)">View Details</button>
+
+            <div id="sh-details" class="details-container">
+                <ul class="feature-list">
+                    <li class="feature-item sh-feature"><strong>Complex Clinical Bookings:</strong> Engineered robust MVC controllers to streamline intricate doctor schedules and appointment algorithms.</li>
+                    <li class="feature-item sh-feature"><strong>Secure Patient Records:</strong> Designed a highly isolated and secure SQL Server schema specifically for managing sensitive medical data.</li>
+                    <li class="feature-item sh-feature"><strong>Dynamic Loyalty Engine:</strong> Programmed a server-side algorithm to calculate and track point-based rewards for patient engagement.</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section id="gearbox" class="project-section" data-bg="#212121" data-text="#FFFFFF">
+        <svg class="bg-icon icon-spin" style="right: 5%; top: 5%; width: 280px; height: 280px; fill: var(--gb-accent); opacity: 0.15;" viewBox="0 0 24 24">
+            <path d="M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.586 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/>
+        </svg>
+        <svg class="bg-icon icon-spin-rev" style="right: 22%; top: 35%; width: 150px; height: 150px; fill: var(--gb-text); opacity: 0.12;" viewBox="0 0 24 24">
+            <path d="M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.586 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/>
+        </svg>
+        <svg class="bg-icon icon-float" style="left: 8%; bottom: 15%; width: 220px; height: 220px; fill: var(--gb-accent); opacity: 0.1;" viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        </svg>
+
         <div class="project-content">
             <h2 style="color: var(--gb-accent);">GearBox</h2>
-            <p class="project-desc">
-                <strong>Role:</strong> .NET Backend Developer | Graduation Project Prototype<br>
+            <p class="project-short-desc">
                 A unified digital ecosystem built entirely on ASP.NET Core MVC, delivering a seamless dual-portal experience for car owners and auto centers from a single robust codebase.
             </p>
-            <ul class="feature-list">
-                <li class="feature-item gb-feature"><strong>Unified Dual-Portal Routing Engine:</strong> Engineered a smart dispatcher mechanism within the MVC controllers that dynamically evaluates user claims and routes them to completely isolated workspaces.</li>
-                <li class="feature-item gb-feature"><strong>Strict Role-Based Access Control (RBAC):</strong> Implemented ASP.NET Core Identity to enforce strict security policies, eliminating the risk of data overlapping between service catalogs.</li>
-                <li class="feature-item gb-feature"><strong>Clean Data Access Integration:</strong> Centralized all database interactions by implementing the Unit of Work alongside the Generic Repository pattern, ensuring transaction safety across booking operations.</li>
-            </ul>
+            
             <div class="tech-stack">
-                <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">ASP.NET Core MVC</span>
+                <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">MVC</span>
                 <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">Repository Pattern</span>
                 <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">Identity</span>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleDetails('gb-details', this)" style="border-color: var(--gb-accent); color: var(--gb-accent);">View Details</button>
+
+            <div id="gb-details" class="details-container">
+                <ul class="feature-list">
+                    <li class="feature-item gb-feature"><strong>Unified Dual-Portal Routing Engine:</strong> Engineered a smart dispatcher mechanism within the MVC controllers that dynamically evaluates user claims and routes them to completely isolated workspaces.</li>
+                    <li class="feature-item gb-feature"><strong>Strict Role-Based Access Control (RBAC):</strong> Implemented ASP.NET Core Identity to enforce strict security policies, eliminating the risk of data overlapping between service catalogs.</li>
+                    <li class="feature-item gb-feature"><strong>Clean Data Access Integration:</strong> Centralized all database interactions by implementing the Unit of Work alongside the Generic Repository pattern, ensuring transaction safety across booking operations.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -390,6 +455,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        // تغيير ألوان الخلفية أثناء التمرير
         const sections = document.querySelectorAll("section, footer");
         sections.forEach((section) => {
             const targetBg = section.getAttribute("data-bg");
@@ -405,38 +471,58 @@
             });
         });
 
+        // حركات البداية (الهيرو)
         const heroTl = gsap.timeline({delay: 0.2});
         heroTl.from(".status-badge", { y: -20, opacity: 0, duration: 0.8 });
         heroTl.from(".hero-title", { y: 30, opacity: 0, duration: 0.8, stagger: 0.2 }, "-=0.5");
         heroTl.from(".hero-desc", { y: 30, opacity: 0, duration: 0.8, stagger: 0.2 }, "-=0.5");
         heroTl.to(".profile-img", { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8");
 
-        gsap.from(".cb-header", {
-            y: 30, opacity: 0, duration: 1, ease: "power2.out",
-            scrollTrigger: { trigger: "#carebox", start: "top 60%" }
-        });
-
+        // حركات كروت CareBox المخفية
         gsap.to(".cb-anim-card", {
             y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power2.out",
-            scrollTrigger: { trigger: ".carebox-grid", start: "top 70%" }
+            scrollTrigger: { trigger: ".carebox-grid", start: "top 80%" }
         });
 
-        gsap.to(".cb-feature-anim", {
-            x: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power2.out",
-            scrollTrigger: { trigger: ".cb-achievements", start: "top 75%" }
-        });
-
-        const otherProjects = [
-            { id: "#shefa", itemClass: ".sh-feature" },
-            { id: "#gearbox", itemClass: ".gb-feature" }
-        ];
-
-        otherProjects.forEach(proj => {
-            gsap.to(`${proj.id} ${proj.itemClass}`, {
-                x: 0, opacity: 1, duration: 0.6, stagger: 0.25, ease: "power2.out",
-                scrollTrigger: { trigger: proj.id, start: "top 60%" }
-            });
-        });
+        // دالة إظهار وإخفاء التفاصيل
+        function toggleDetails(containerId, btnElement) {
+            const container = document.getElementById(containerId);
+            
+            if (container.classList.contains("expanded")) {
+                // إخفاء
+                gsap.to(container, {
+                    height: 0, 
+                    opacity: 0, 
+                    duration: 0.5, 
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        container.classList.remove("expanded");
+                        btnElement.innerText = "View Details";
+                        ScrollTrigger.refresh(); 
+                    }
+                });
+            } else {
+                // إظهار
+                container.classList.add("expanded");
+                btnElement.innerText = "Hide Details";
+                
+                // حساب الطول التلقائي للمحتوى
+                gsap.set(container, { height: "auto" });
+                const fullHeight = container.offsetHeight;
+                gsap.set(container, { height: 0 });
+                
+                gsap.to(container, {
+                    height: fullHeight, 
+                    opacity: 1, 
+                    duration: 0.6, 
+                    ease: "power2.out",
+                    onComplete: () => {
+                        gsap.set(container, { height: "auto" }); 
+                        ScrollTrigger.refresh();
+                    }
+                });
+            }
+        }
     </script>
 </body>
 </html>
