@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hussien Osman | Backend Software Engineer</title>
+    <style>
+        /* الاساسيات */
+        :root {
+            --bg-dark: #050505;
+            --text-light: #FFFFFF;
+            --cb-bg: #E3E3E3; --cb-text: #191919; --cb-accent: #ED1C24;
+            --sh-bg: #0070CD; --sh-text: #FFFFFF; --sh-accent: #DE1E26;
+            --gb-bg: #212121; --gb-text: #FFFFFF; --gb-accent: #F8B128;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            transition: background-color 1s ease-in-out, color 1s ease-in-out; 
+        }
+
+        .glow-bg {
+            position: fixed; top: 50%; left: 50%; width: 80vw; height: 80vh;
+            background: radial-gradient(circle, rgba(128, 128, 128, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%); z-index: -1; pointer-events: none;
+            transition: background 0.3s ease-out;
+        }
+
+        section { 
+            min-height: 100vh; padding: 10vh 10vw; 
+            display: flex; align-items: center; box-sizing: border-box; justify-content: center;
+            position: relative;
+        }
+
+        /* --- الهيرو --- */
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; text-align: left; justify-content: flex-start; }
+        .hero-content { display: flex; flex-direction: column; justify-content: center; }
+        .status-badge { display: inline-block; padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); font-size: 0.85rem; margin-bottom: 20px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
+        
+        .hero h1 { font-size: 4.5rem; margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -1px; }
+        .hero h2 { font-size: 1.6rem; margin: 15px 0; color: #E3E3E3; font-weight: 400; }
+        .hero p.bio { font-size: 1.15rem; opacity: 0.8; max-width: 650px; line-height: 1.6; margin-top: 0; }
+
+        .skills-box {
+            margin-top: 20px; padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ffffff;
+            border-radius: 0 10px 10px 0;
+            backdrop-filter: blur(10px); max-width: 650px;
+        }
+        .skills-box p { margin: 12px 0; font-size: 1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.5; }
+        .skills-box strong { color: #ffffff; font-weight: 600; }
+
+        .contact-links { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .contact-btn {
+            display: flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFF; text-decoration: none;
+            font-weight: 500; font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease; backdrop-filter: blur(5px);
+        }
+        .contact-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
+        .contact-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
+        .profile-img {
+            width: 350px; height: 350px; object-fit: cover;
+            border-radius: 20px; border: 1px solid rgba(128,128,128,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            opacity: 0; transform: translateY(30px);
+        }
+
+        .scroll-indicator {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            opacity: 0.6; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
+        }
+        .mouse { width: 24px; height: 36px; border: 2px solid #FFF; border-radius: 15px; position: relative; }
+        .wheel { width: 4px; height: 8px; background: #FFF; border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scroll 1.5s infinite; }
+        @keyframes scroll { 0% { top: 6px; opacity: 1; } 100% { top: 18px; opacity: 0; } }
+
+        .section-divider {
+            width: 100%; text-align: center; padding: 60px 0;
+            font-size: 2rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;
+            border-bottom: 1px solid rgba(128,128,128,0.2); margin-bottom: 50px;
+        }
+
+        /* --- تنسيق المشاريع المشترك --- */
+        .project-content { max-width: 1000px; width: 100%; }
+        .project-content h2 { font-size: 4rem; margin: 0 0 1rem 0; line-height: 1; letter-spacing: -1px; }
+        .project-desc { font-size: 1.1rem; opacity: 0.85; margin-bottom: 2.5rem; line-height: 1.7; }
+        .feature-list { list-style: none; padding: 0; margin: 0; }
+        .feature-item { 
+            background: rgba(128, 128, 128, 0.1); border-left: 3px solid; 
+            padding: 20px 25px; margin-bottom: 15px; font-size: 1rem; line-height: 1.6; opacity: 0; transform: translateX(-30px); 
+        }
+        .tech-stack { display: flex; gap: 10px; margin-top: 35px; flex-wrap: wrap; }
+        .tech-badge { 
+            padding: 6px 16px; border-radius: 4px; background: rgba(128, 128, 128, 0.1); 
+            font-size: 0.85rem; font-weight: 500; border: 1px solid rgba(128, 128, 128, 0.2); 
+        }
+
+        #shefa .feature-item { border-color: var(--sh-accent); }
+        #gearbox .feature-item { border-color: var(--gb-accent); }
+
+        /* --- تنسيق CareBox VIP --- */
+        .carebox-content { max-width: 1200px; width: 100%; text-align: center; } /* توسيط المحتوى */
+        .grad-badge {
+            display: inline-block; padding: 6px 12px; border-radius: 4px;
+            background: var(--cb-accent); color: #FFF; font-weight: 600; font-size: 0.9rem;
+            margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        
+        /* تنسيق اللوجو في المنتصف */
+        .cb-logo-placeholder {
+            width: 100px; height: 100px; border-radius: 15px; object-fit: contain;
+            background: rgba(0,0,0,0.05); border: 1px dashed rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 0.8rem; color: var(--cb-text);
+            margin: 0 auto 15px auto; /* توسيط أفقي */
+        }
+
+        .cb-meta { font-size: 1rem; margin-bottom: 8px; opacity: 0.9; }
+        
+        .carebox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; text-align: left; } /* إعادة محاذاة الكروت لليسار */
+        
+        .cb-card {
+            background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px; padding: 30px;
+            opacity: 0; transform: translateY(30px);
+        }
+        .cb-card h3 { color: var(--cb-accent); margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+        .cb-card p, .cb-card ul { font-size: 1rem; line-height: 1.7; opacity: 0.9; }
+        .cb-card ul { padding-left: 20px; }
+        .cb-card li { margin-bottom: 12px; }
+        
+        .cb-achievements { grid-column: 1 / -1; }
+        .cb-achievements .feature-item { border-color: var(--cb-accent); background: rgba(0,0,0,0.02); color: var(--cb-text); }
+        .cb-achievements .feature-item strong { color: var(--cb-accent); }
+
+        #carebox .tech-badge { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.2); color: var(--cb-text); justify-content: center;}
+        #carebox .tech-stack { justify-content: center; } /* توسيط البادجات */
+
+        /* --- Footer --- */
+        .footer {
+            padding: 80px 20px; text-align: center; background-color: #030303; border-top: 1px solid rgba(255,255,255,0.05); color: #FFF;
+        }
+        .footer h2 { font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 300; }
+        .footer p { color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px; }
+        .footer .contact-btn { display: inline-flex; background: #FFF; color: #000; font-weight: 600; padding: 15px 30px; border-radius: 4px; border: none; }
+        .footer .contact-btn:hover { background: #e2e8f0; transform: none; }
+
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: left; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero-image-container { order: -1; margin-bottom: 2rem; justify-content: flex-start; }
+            .carebox-grid { grid-template-columns: 1fr; }
+            .scroll-indicator { display: none; }
+        }
+    </style>
+</head>
+<body data-bg="#050505" data-text="#FFFFFF"> 
+
+    <div class="glow-bg"></div>
+
+    <section class="hero" id="home" data-bg="#050505" data-text="#FFFFFF">
+        <div class="hero-content">
+            <div class="status-badge">Available for Engineering Roles</div>
+            <h1 class="hero-title">Hussien Osman</h1>
+            <h2 class="hero-title">Backend .NET Developer | C# & ASP.NET Core</h2>
+            <p class="bio hero-desc">A Computer Science graduate specializing in architecting scalable, isolated, and secure backend systems for complex business requirements.</p>
+            
+            <div class="skills-box hero-desc">
+                <p><strong>Core Stack:</strong> C#, ASP.NET Core (Web API/MVC), SQL Server, Entity Framework Core.</p>
+                <p><strong>Architecture:</strong> N-Tier Architecture, Repository Pattern, Unit of Work, SOLID Principles.</p>
+                <p><strong>Key Focus:</strong> High-performance RESTful APIs, spatial data routing, strict RBAC security, and dynamic database workflows.</p>
+            </div>
+
+            <div class="contact-links hero-desc">
+                <a href="mailto:hussien.osman.dev@gmail.com" class="contact-btn">
+                    <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                    Email Me
+                </a>
+                <a href="https://github.com/HussienOsman0" target="_blank" class="contact-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/public-profile/settings/?trk=d_flagship3_profile_self_view_public_profile&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BglpzwUFLQLiSjYt9Lep0wQ%3D%3D" target="_blank" class="contact-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="hussien.jpg" alt="Hussien Osman" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'">
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse"><div class="wheel"></div></div>
+            Projects
+        </div>
+    </section>
+
+    <section id="carebox" class="project-section" data-bg="#E3E3E3" data-text="#191919">
+        <div class="carebox-content">
+            <div class="section-divider" style="color: var(--cb-text); border-color: rgba(0,0,0,0.1);">Featured Engineering Work</div>
+            
+            <div class="cb-header">
+                <div class="grad-badge">Graduation Project & Masterpiece</div>
+                
+                
+                
+                <h2 style="color: var(--cb-accent); font-size: 4.5rem; margin: 0 0 10px 0; letter-spacing: -2px;">CareBox</h2>
+
+                <h3 style="margin: 0 0 20px 0; font-size: 1.8rem; font-weight: 300;">The Ultimate Automotive Service Ecosystem</h3>
+                
+                <p class="cb-meta"><strong>Role:</strong> Lead Backend Engineer (.NET) | <strong>Duration:</strong> 2025 - 2026</p>
+                <p class="cb-meta"><strong>Team:</strong> Developed in collaboration with Ziad (Team Leader), Assem, Abdullah, Talaat, Mahmoud, Hazem, and Salah.</p>
+            </div>
+
+            <div class="carebox-grid">
+                <div class="cb-card cb-anim-card">
+                    <h3>Project Overview</h3>
+                    <p>A comprehensive, end-to-end digital ecosystem revolutionizing the automotive service industry by connecting vehicle owners with service providers across three integrated platforms:</p>
+                    <ul>
+                        <li><strong>Client Mobile Application (Flutter):</strong> A smart digital garage and SOS companion for drivers.</li>
+                        <li><strong>Provider Web Dashboard (React):</strong> A powerful Mini-ERP system for auto centers to manage inventory, invoicing, and bookings.</li>
+                        <li><strong>The Backend Engine (.NET 8):</strong> The robust core that orchestrates real-time data, spatial routing, and strict data isolation.</li>
+                    </ul>
+                </div>
+
+                <div class="cb-card cb-anim-card">
+                    <h3>Architecture & Tech Stack</h3>
+                    <ul>
+                        <li>Designed and managed over <strong>20+ complex relational database entities</strong>.</li>
+                        <li>Enforced <strong>ACID properties</strong> to guarantee transaction safety across all financial and booking operations.</li>
+                        <li>Structured data transfer using <strong>DTOs</strong> to prevent over-posting vulnerabilities and minimize API payload sizes.</li>
+                    </ul>
+                    <div class="tech-stack" style="margin-top: 20px;">
+                        <span class="tech-badge">.NET 8 Web API</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">EF Core (Code-First)</span>
+                        <span class="tech-badge">N-Tier Architecture</span>
+                        <span class="tech-badge">Unit of Work</span>
+                        <span class="tech-badge">JWT / RBAC</span>
+                        <span class="tech-badge">NetTopologySuite</span>
+                    </div>
+                </div>
+
+                <div class="cb-card cb-achievements cb-anim-card">
+                    <h3>Key Engineering Achievements</h3>
+                    <ul class="feature-list" style="margin-top: 15px;">
+                        <li class="feature-item cb-feature-anim"><strong>Real-Time SOS & Geolocation Routing:</strong> Integrated NetTopologySuite and Spatial Data (Point) within SQL Server to dynamically calculate and route emergency SOS broadcasts to the nearest service providers in real-time, eliminating heavy mathematical calculations on the database level.</li>
+                        <li class="feature-item cb-feature-anim"><strong>Data Isolation & Security:</strong> Implemented strict Role-Based Access Control (RBAC) and Multi-tenant data isolation logic, ensuring that service providers operate in completely siloed workspaces without any risk of data overlapping or unauthorized access.</li>
+                        <li class="feature-item cb-feature-anim"><strong>Soft Deletion & Data Integrity:</strong> Engineered a rigorous Soft Deletion mechanism across core entities (Vehicles, Services, Products) to preserve historical data integrity. This ensures that past invoices and completed bookings remain fully accessible and calculation-safe even if underlying items are removed.</li>
+                        <li class="feature-item cb-feature-anim"><strong>Smart "Ignore" Logic for Emergencies:</strong> Designed a complex composite-key workflow allowing individual providers to dismiss emergency requests without removing them from the global broadcast pool for other nearby workshops.</li>
+                        <li class="feature-item cb-feature-anim"><strong>Dynamic Billing & Invoicing Engine:</strong> Developed a robust financial engine using EF Core Fluent API to automatically calculate service costs, manage inventory deduction, and transition bookings through their lifecycle seamlessly.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shefa" class="project-section" data-bg="#0070CD" data-text="#FFFFFF">
+        <div class="project-content">
+            <h2 style="color: var(--sh-text);">Shefa<span style="color: var(--sh-accent);"></h2>
+            <p class="project-desc">
+                <strong>Role:</strong> .NET Backend Developer<br>
+                A comprehensive digital health platform designed to connect patients with medical professionals, focusing on secure data workflows and complex clinical bookings.
+            </p>
+            <ul class="feature-list">
+                <li class="feature-item sh-feature"><strong>Complex Clinical Bookings:</strong> Engineered robust MVC controllers to streamline intricate doctor schedules and appointment algorithms.</li>
+                <li class="feature-item sh-feature"><strong>Secure Patient Records:</strong> Designed a highly isolated and secure SQL Server schema specifically for managing sensitive medical data.</li>
+                <li class="feature-item sh-feature"><strong>Dynamic Loyalty Engine:</strong> Programmed a server-side algorithm to calculate and track point-based rewards for patient engagement.</li>
+            </ul>
+            <div class="tech-stack">
+                <span class="tech-badge">ASP.NET Core MVC</span><span class="tech-badge">SQL Server</span><span class="tech-badge">EF Core</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="gearbox" class="project-section" data-bg="#212121" data-text="#FFFFFF">
+        <div class="project-content">
+            <h2 style="color: var(--gb-accent);">GearBox</h2>
+            <p class="project-desc">
+                <strong>Role:</strong> .NET Backend Developer | Graduation Project Prototype<br>
+                A unified digital ecosystem built entirely on ASP.NET Core MVC, delivering a seamless dual-portal experience for car owners and auto centers from a single robust codebase.
+            </p>
+            <ul class="feature-list">
+                <li class="feature-item gb-feature"><strong>Unified Dual-Portal Routing Engine:</strong> Engineered a smart dispatcher mechanism within the MVC controllers that dynamically evaluates user claims and routes them to completely isolated workspaces.</li>
+                <li class="feature-item gb-feature"><strong>Strict Role-Based Access Control (RBAC):</strong> Implemented ASP.NET Core Identity to enforce strict security policies, eliminating the risk of data overlapping between service catalogs.</li>
+                <li class="feature-item gb-feature"><strong>Clean Data Access Integration:</strong> Centralized all database interactions by implementing the Unit of Work alongside the Generic Repository pattern, ensuring transaction safety across booking operations.</li>
+            </ul>
+            <div class="tech-stack">
+                <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">ASP.NET Core MVC</span>
+                <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">Repository Pattern</span>
+                <span class="tech-badge" style="color: var(--gb-accent); border-color: var(--gb-accent);">Identity</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" data-bg="#030303" data-text="#FFFFFF">
+        <h2>Ready to build scalable systems?</h2>
+        <p>Let's discuss how my backend expertise can bring value to your engineering team.</p>
+        
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="tel:+201281969596" class="contact-btn">
+                <svg style="width:18px; height:18px; margin-right:8px;" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.022-3.49-6.82-2.106 1.039c-2.617 1.291-3.666 4.208-2.637 7.042 1.378 3.791 4.793 11.233 11.268 11.233 1.258 0 2.502-.387 3.565-1.127l1.512-1.567zm-11.252-19.467c.18-.088.371-.177.558-.261l2.428 4.743c-.183.084-.37.168-.553.255-1.393.659-2.091 2.253-1.579 3.651.521 1.417 2.148 2.052 3.551 1.385l.551-.264 2.449 4.726c-.188.087-.384.175-.572.268-1.576.764-2.584 2.28-2.584 4.024 0 1.09-.434 2.115-1.222 2.883-2.079 2.025-6.264-1.325-8.497-7.464-1.589-4.368.106-7.854 4.47-9.946z"/></svg>
+                +20 128 196 9596
+            </a>
+            <a href="mailto:hussien.osman.dev@gmail.com" class="contact-btn">
+                <svg style="width:18px; height:18px; margin-right:8px;" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                Email Me
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sections = document.querySelectorAll("section, footer");
+        sections.forEach((section) => {
+            const targetBg = section.getAttribute("data-bg");
+            const targetText = section.getAttribute("data-text");
+            if(!targetBg) return;
+            
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 50%", 
+                end: "bottom 50%",
+                onEnter: () => { document.body.style.backgroundColor = targetBg; document.body.style.color = targetText; },
+                onEnterBack: () => { document.body.style.backgroundColor = targetBg; document.body.style.color = targetText; }
+            });
+        });
+
+        const heroTl = gsap.timeline({delay: 0.2});
+        heroTl.from(".status-badge", { y: -20, opacity: 0, duration: 0.8 });
+        heroTl.from(".hero-title", { y: 30, opacity: 0, duration: 0.8, stagger: 0.2 }, "-=0.5");
+        heroTl.from(".hero-desc", { y: 30, opacity: 0, duration: 0.8, stagger: 0.2 }, "-=0.5");
+        heroTl.to(".profile-img", { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8");
+
+        gsap.from(".cb-header", {
+            y: 30, opacity: 0, duration: 1, ease: "power2.out",
+            scrollTrigger: { trigger: "#carebox", start: "top 60%" }
+        });
+
+        gsap.to(".cb-anim-card", {
+            y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power2.out",
+            scrollTrigger: { trigger: ".carebox-grid", start: "top 70%" }
+        });
+
+        gsap.to(".cb-feature-anim", {
+            x: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power2.out",
+            scrollTrigger: { trigger: ".cb-achievements", start: "top 75%" }
+        });
+
+        const otherProjects = [
+            { id: "#shefa", itemClass: ".sh-feature" },
+            { id: "#gearbox", itemClass: ".gb-feature" }
+        ];
+
+        otherProjects.forEach(proj => {
+            gsap.to(`${proj.id} ${proj.itemClass}`, {
+                x: 0, opacity: 1, duration: 0.6, stagger: 0.25, ease: "power2.out",
+                scrollTrigger: { trigger: proj.id, start: "top 60%" }
+            });
+        });
+    </script>
+</body>
+</html>
